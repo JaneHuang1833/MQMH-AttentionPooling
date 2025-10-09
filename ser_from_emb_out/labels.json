@@ -1,0 +1,22 @@
+{
+  "label2id": {
+    "happy": 0,
+    "angry": 1,
+    "sad": 2,
+    "neutral": 3,
+    "surprised": 4,
+    "disgusted": 5,
+    "fearful": 6,
+    "other": 7
+  },
+  "id2label": {
+    "0": "happy",
+    "1": "angry",
+    "2": "sad",
+    "3": "neutral",
+    "4": "surprised",
+    "5": "disgusted",
+    "6": "fearful",
+    "7": "other"
+  }
+}
