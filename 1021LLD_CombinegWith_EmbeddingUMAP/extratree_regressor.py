@@ -110,4 +110,48 @@ shap.summary_plot(
     max_display=20
 )
 plt.title(f"SHAP Summary Plot for {dim_name}")
+
 plt.show()
+
+from sklearn.inspection import PartialDependenceDisplay
+import matplotlib.pyplot as plt
+
+
+
+# 这里只能单独对单输出维度的模型使用 → 拆成两个子模型分别做 ICE
+
+# 拆成 dim1 模型：
+y1 = y[:, 0]
+final_est1 = ExtraTreesRegressor(**final_est.get_params())
+final_est1.fit(X, y1)
+
+PartialDependenceDisplay.from_estimator(
+    final_est1,
+    X,
+    features=feature_names,
+    feature_names=feature_names,
+    kind="individual",           # individual = ICE 曲线
+    grid_resolution=50
+)
+
+plt.suptitle("ICE plots for dim1")
+plt.tight_layout()
+plt.savefig('ICE plots for dim1.png', dpi=300)
+
+# 拆成 dim2 模型：
+y2 = y[:, 1]
+final_est2 = ExtraTreesRegressor(**final_est.get_params())
+final_est2.fit(X, y1)
+
+PartialDependenceDisplay.from_estimator(
+    final_est2,
+    X,
+    features=feature_names,
+    feature_names=feature_names,
+    kind="individual",           # individual = ICE 曲线
+    grid_resolution=50
+)
+
+plt.suptitle("ICE plots for dim2")
+plt.tight_layout()
+plt.savefig('ICE plots for dim2.png', dpi=300)
