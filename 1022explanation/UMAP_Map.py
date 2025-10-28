@@ -40,7 +40,6 @@ param_grid = {
 df_all = pd.read_excel('combined_emotion_data.xlsx')
 
 X = df_all[embedding_cols].values
-labels = df_all['emotion'].values
 
 
 # 寻找最优参数使得余弦距离最小（省略）
